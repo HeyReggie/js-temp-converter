@@ -1,32 +1,30 @@
-
-
 //click event
-document.getElementById("submit").addEventListener('click', convert);
-document.getElementById("reset").addEventListener('click', reset);
+document.getElementById("submit").addEventListener("click", convert);
+document.getElementById("reset").addEventListener("click", reset);
 
 //global variable
 let chosenTemp;
 
 //listens for an input field to change, and then changes chosenTemp to that field
-document.getElementById("celsius").onchange = () => chosenTemp = "celsius";
+document.getElementById("celsius").onchange = () => (chosenTemp = "celsius");
 
-document.getElementById("fahrenheit").onchange = () => chosenTemp = "fahrenheit";
+document.getElementById("fahrenheit").onchange = () =>
+  (chosenTemp = "fahrenheit");
 
-document.getElementById("kelvin").onchange = () => chosenTemp = "kelvin";
+document.getElementById("kelvin").onchange = () => (chosenTemp = "kelvin");
 
-document.getElementById("rankine").onchange = () => chosenTemp = "rankine";
+document.getElementById("rankine").onchange = () => (chosenTemp = "rankine");
 
 //reset all values
 function reset() {
-    document.getElementById("celsius").value = "";
-    document.getElementById("fahrenheit").value = "";
-    document.getElementById("kelvin").value = "";
-    document.getElementById("rankine").value = "";
+  document.getElementById("celsius").value = "";
+  document.getElementById("fahrenheit").value = "";
+  document.getElementById("kelvin").value = "";
+  document.getElementById("rankine").value = "";
 }
 
 //conversion function
 function convert() {
-
   //local variables
   let celsius = document.getElementById("celsius").value;
   celsius = parseFloat(celsius);
@@ -48,39 +46,39 @@ function convert() {
 
   //if the celsius field changes, convert the other values
   if (chosenTemp === "celsius") {
-    conversionF = celsius * 9 / 5 + 32;
+    conversionF = (celsius * 9) / 5 + 32;
     conversionK = celsius + 273.15;
     conversionR = conversionF + 459.67;
     //round the converted values to two decimal places
     document.getElementById("fahrenheit").value = conversionF.toFixed(2);
     document.getElementById("kelvin").value = conversionK.toFixed(2);
     document.getElementById("rankine").value = conversionR.toFixed(2);
-  } 
-    //if the fahrenheit field changes, convert the other values
-    else if (chosenTemp === "fahrenheit") {
-    conversionC = (fahrenheit - 32) * 5 / 9;
+  }
+  //if the fahrenheit field changes, convert the other values
+  else if (chosenTemp === "fahrenheit") {
+    conversionC = ((fahrenheit - 32) * 5) / 9;
     conversionK = conversionC + 273.15;
     conversionR = fahrenheit + 459.67;
     //round the converted values to two decimal places
     document.getElementById("celsius").value = conversionC.toFixed(2);
     document.getElementById("kelvin").value = conversionK.toFixed(2);
     document.getElementById("rankine").value = conversionR.toFixed(2);
-  } 
-    //if the kelvin field changes, convert the other values
-    else if (chosenTemp === "kelvin") {
+  }
+  //if the kelvin field changes, convert the other values
+  else if (chosenTemp === "kelvin") {
     conversionK = kelvin;
     conversionC = kelvin - 273.15;
-    conversionF = conversionC * 9 / 5 + 32;
+    conversionF = (conversionC * 9) / 5 + 32;
     conversionR = conversionF + 459.67;
     //round the converted values to two decimal places
     document.getElementById("celsius").value = conversionC.toFixed(2);
     document.getElementById("fahrenheit").value = conversionF.toFixed(2);
     document.getElementById("rankine").value = conversionR.toFixed(2);
   }
-    //if the rankine field changes, convert the other values
-    else if (chosenTemp === "rankine") {
+  //if the rankine field changes, convert the other values
+  else if (chosenTemp === "rankine") {
     conversionF = rankine - 459.67;
-    conversionC = (conversionF - 32) * 5 / 9;
+    conversionC = ((conversionF - 32) * 5) / 9;
     conversionK = conversionC + 273.15;
     //round the converted values to two decimal places
     document.getElementById("celsius").value = conversionC.toFixed(2);
@@ -95,14 +93,14 @@ function convert() {
   document.getElementById("rankine").innerHTML = conversionR;
 
   if (conversionK === 0 || conversionR === 0) {
-      alert("You have reached absolute zero, the coldest theoretical temperature in existence.");
-      reset();
+    alert(
+      "You have reached absolute zero, the coldest theoretical temperature in existence."
+    );
+    reset();
+  } else if (conversionK < 0 || conversionR < 0) {
+    alert(
+      "There must be a typo, this is an impossible temperature. Please try again."
+    );
+    reset();
   }
-    else if (conversionK < 0 || conversionR < 0) {
-        alert("There must be a typo, this is an impossible temperature. Please try again.");
-        reset();
-    }
-
 }
-
-
